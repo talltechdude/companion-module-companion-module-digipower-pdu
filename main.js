@@ -43,24 +43,28 @@ class ModuleInstance extends InstanceBase {
 	}
 
 	async createSession() {
+		this.updateStatus(InstanceStatus.Connecting)
 		if (this.sessionRead) {
 			this.sessionRead.close()
 		}
 		if (this.sessionWrite) {
 			this.sessionWrite.close()
 		}
+		try {
+			let options = {
+				port: this.config.port,
+				version: snmp.Version1,
+				backwardsGetNexts: true,
+				idBitsSize: 32,
+			}
+			
+			this.sessionRead = snmp.createSession(this.config.host, this.config.communityRead, options)
+			this.sessionWrite = snmp.createSession(this.config.host, this.config.communityWrite, options)
 
-		let options = {
-			port: this.config.port,
-			version: snmp.Version1,
-			backwardsGetNexts: true,
-			idBitsSize: 32,
+			this.readStatus()
+		} catch (e) {
+			this.updateStatus(InstanceStatus.BadConfig)
 		}
-		
-		this.sessionRead = snmp.createSession(this.config.host, this.config.communityRead, options)
-		this.sessionWrite = snmp.createSession(this.config.host, this.config.communityWrite, options)
-
-		this.readStatus()
 	}
 
 	// Return config fields for web config
