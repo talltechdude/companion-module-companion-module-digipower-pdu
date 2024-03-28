@@ -1,0 +1,26 @@
+{
+	"id": "companion-module-digipower-pdu",
+	"name": "companion-module-digipower-pdu",
+	"shortname": "digipower-pdu",
+	"description": "Module to remote control Digipower Power Distribution Units (PDUs)",
+	"version": "0.0.0",
+	"license": "MIT",
+	"repository": "git+https://github.com/bitfocus/companion-module-companion-module-digipower-pdu.git",
+	"bugs": "https://github.com/bitfocus/companion-module-companion-module-digipower-pdu/issues",
+	"maintainers": [
+		{
+			"name": "TallTechDude",
+			"email": ""
+		}
+	],
+	"runtime": {
+		"type": "node18",
+		"api": "nodejs-ipc",
+		"apiVersion": "0.0.0",
+		"entrypoint": "../main.js"
+	},
+	"legacyIds": [],
+	"manufacturer": "Digipower",
+	"products": ["PDU"],
+	"keywords": []
+}
